@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+
+
+    <script src="../node_modules/angular/angular.js"></script>
+
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/angular-toastr/dist/angular-toastr.css">
+
+
+    <script src="../app/config/pd-app.js"></script>
+    <script src="../app/control/cadastro-carro-controller.js"></script>
+    <script src="../node_modules/angular-messages/angular-messages.js"></script>
+    <script src="../node_modules/angular-toastr/src/toastr.js"></script>
+    <script src="../node_modules/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="../node_modules/angular-animate/angular-animate.js"></script>
+    <script src="../app/service/service-mensagens.js"></script>
+    <script src="../app/filter/maisculo-filter.js"></script>
+
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">-->
+</head>
+<body ng-app="pdApp" class="container">
+<div ng-controller="CadastroCarroController">
+<form name="form" novalidate="true">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+
+                <label >carro</label>
+                <input type="text" class="form-control" ng-model="entidade.nome"
+                name="carro"
+
+                >
+
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group"
+                ng-class="{'has-error': form.cor.$touched && form.cor.$invalid}">
+                <label >cor</label>
+                <input type="text" class="form-control" ng-model="entidade.cor"
+                ng-required="true"
+                name="cor">
+                <div class="text-center text-capitalize text-danger" ng-messages="form.cor.$error"
+                ng-if="form.cor.$touched">
+
+                    <div ng-message="required">campo obrigatorio</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group"
+                 ng-class="{'has-error': form.data.$touched && form.data.$invalid}">
+                <label >cor</label>
+                <input type="date" class="form-control" ng-model="entidade.data"
+                       ng-required="true"
+                       name="data">
+
+            </div>
+        </div>
+    </div>
+        <nav class="navbar navbar-btn">
+            <button class="btn-primary" ng-click="salvar()">
+            salvar
+            </button>
+            <button class="btn-danger" ng-click="limpar()">
+                limpar
+            </button>  <button class="btn-warning" ng-click="destruir()">
+            destroy
+        </button>
+        </nav>
+</form>
+    <div class="col-lg-12">
+        <table class="table">
+            <tr>
+                <td >
+                    Carro
+                </td>
+                <td>
+                Cor
+            </td>
+
+            </tr>
+            <tr ng-repeat="c in listaDeCarros">
+                <td ng-bind="c.nome | filt">
+                </td>
+                <td ng-bind="c.cor">
+                </td>
+                <td ng-bind="c.data | date :'dd/MM/yyyy'">
+
+            </td>
+
+            </tr>
+
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
